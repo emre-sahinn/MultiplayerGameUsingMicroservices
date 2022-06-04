@@ -51,7 +51,7 @@ export default function Login() {
             Log In
             </button>
             
-            <button className="loginRegisterButton">Create a New Account </button>
+            <button className="loginRegisterButton">  Create a New Account </button>
             
            
             </div>

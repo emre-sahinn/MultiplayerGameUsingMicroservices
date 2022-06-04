@@ -1,4 +1,5 @@
 import Login from "./components/login/Login";
+import Register from "./components/register/Register";
 
 
 import {
@@ -19,7 +20,8 @@ function App() {
     <Router>
       <>
       <Routes>
-        <Route path="/login" element={<Login/>}/>
+        <Route path="/" element={<Login/>}/>
+        <Route path="/register" element={<Register/>}/>
         
        
       </Routes>
