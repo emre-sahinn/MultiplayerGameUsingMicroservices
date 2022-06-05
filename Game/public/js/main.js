@@ -46,7 +46,7 @@ var MenuScene = new Phaser.Class({
         var that = this;
 
 
-        var username = "bunu bi sekilde oyuncudan almamiz lazim"
+        var username = "isimler tokenden gelecek"
         that.scene.start('GameScene', { username: username });
         //  Populate the text with whatever they typed in
         //console.log('Welcome ' + inputText.value);

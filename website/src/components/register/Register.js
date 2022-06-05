@@ -25,7 +25,7 @@ export default function Register() {
       };
       try {
         const res = await axios.post("http://localhost:80/api/database/register/", user); //current chat varsa önemli
-        console.log("buraya girildi")
+        console.log(res);
 
 
         toast.success("Kayıt başarılı");

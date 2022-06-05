@@ -38,8 +38,9 @@ app.use(express.json());
 app.use(express.static('public'));
 app.get('/', function (req, res) {
   console.log("gelen istek: ", req.body);
+  /*
+//tokeni kontrol ediyoruz
   try{
-  //tokeni kontrol ediyoruz
   var clientServerOptions = {
     uri: 'http://localhost:5001/api/auth/checkToken',
     body: JSON.stringify(req.body),
@@ -56,7 +57,7 @@ app.get('/', function (req, res) {
     console.log("unauthorized");
     return res.status(401).send("you are unauthorized");
   }
-
+*/
   res.sendFile(__dirname + '/public/main.html');
 });
 

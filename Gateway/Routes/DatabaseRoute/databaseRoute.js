@@ -38,7 +38,7 @@ router.post('/register', function(req, res) {
     }
     console.log("register request sent");
     request(clientServerOptions, function (error, response) {
-        res.send(response.body);
+        res.status(response.statusCode).send(response.body);
         return;
     });
 });
