@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
 const express = require('express');
+var cors = require('cors');
 const bodyParser = require('body-parser');
 const userRoute = require("./routes/users");
 var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors());
 
 mongoose.connect("mongodb+srv://MicroserviceProject:mongo.123@microserviceproject.gbycla6.mongodb.net/?retryWrites=true&w=majority", {
 
