@@ -27,11 +27,11 @@ export default function Register() {
         const res = await axios.post("http://localhost:80/api/database/register/", user); //current chat varsa önemli
         console.log("buraya girildi")
 
-        toast.success("please check your email");
+        toast.success("Kayıt başarılı");
 
       } catch (err) {
         console.log(err);
-        toast.error("please check your email");
+        toast.error("Bir sorunla karşılaştık :(");
       }
     }
   };
