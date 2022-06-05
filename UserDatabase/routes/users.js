@@ -68,4 +68,21 @@ router.post("/login", async (req, res) => {
   }
 });
 
+//Check token 
+router.post("/checkToken", async (req, res) => {
+  try {
+    console.log(req.body);
+    jwt.verify(req.body.token, "microserviceapp", function(err, decoded) {
+      if (err) {
+        return res.status(401).json(err)
+      }
+  });
+
+  res.send("user authenticated");
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err)
+  }
+});
+
 module.exports = router;

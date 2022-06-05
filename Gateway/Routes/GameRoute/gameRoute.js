@@ -19,8 +19,4 @@ router.get('/serverList', function(req, res) {
     });
 });
 
-router.post('/play', function(req, res) {
-    //hangi sunucuya girecegini secsin
-});
-
 module.exports = router;
