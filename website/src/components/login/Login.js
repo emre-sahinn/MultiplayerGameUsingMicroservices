@@ -1,5 +1,5 @@
 import "./login.css";
-import { useRef, useState } from "react";
+import { useRef, useState,useContext} from "react";
 import axios from "axios";
 import { Link } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
@@ -9,22 +9,15 @@ import {AuthContext} from "../../context/AuthContext";
 export default function Login() {
   const username = useRef();
   const password = useRef();
-  const [token, setToken] = useState("");
-  const AuthContext = useContext(AuthContext);
+  const token = useContext(AuthContext);
 
   const handleClick = async (e) => {
      e.preventDefault();
-    
-
-     
-         
-       
-
-    try {
+     try {
       const res = await axios.post("http://localhost:80/api/database/login", { username: username.current.value, password: password.current.value });
       console.log("res", res.data);
-      AuthContext.tokenHandler(res.data);
-      setToken(res.data);
+      token.tokenHandler(res.data);
+  
       toast.success("başarılı");
     } catch (err) {
 
