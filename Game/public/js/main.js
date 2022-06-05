@@ -45,33 +45,11 @@ var MenuScene = new Phaser.Class({
         this.loginUI.addListener('click');
         var that = this;
 
-        this.loginUI.on('click', function (event) {
-            if (event.target.name === 'playButton') {
-                var inputText = this.getChildByName('nameField');
 
-                //  Have they entered anything?
-                if (inputText.value !== '') {
-                    //  Turn off the click events
-                    this.removeListener('click');
-
-                    //  Hide the login element
-                    this.setVisible(false);
-                    that.scene.start('GameScene', { username: inputText.value });
-                    //  Populate the text with whatever they typed in
-                    //console.log('Welcome ' + inputText.value);
-
-                }
-
-            }
-
-        });
-
-        this.tweens.add({
-            targets: this.loginUI,
-            y: this.scale.height / 2,
-            duration: 1000,
-            ease: 'Power3'
-        });
+        var username = "bunu bi sekilde oyuncudan almamiz lazim"
+        that.scene.start('GameScene', { username: username });
+        //  Populate the text with whatever they typed in
+        //console.log('Welcome ' + inputText.value);
     }
 
 });
@@ -588,13 +566,13 @@ var GameScene = new Phaser.Class({
                         self.otherPlayersDead.add(otherPlayer);
                         otherPlayer.list[0].anims.play('died', true);
                     }
-                }else{
+                } else {
                     otherPlayer.destroy();
                 }
 
             });
 
-            if(self.pCount > 30){
+            if (self.pCount > 30) {
                 self.pCount = 0;
                 self.otherPlayersDead.destroy();
             }
@@ -619,7 +597,7 @@ var GameScene = new Phaser.Class({
                 }
             });
 
-            if(zCount > 30){
+            if (zCount > 30) {
                 self.zombies.destroy();
             }
         });

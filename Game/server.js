@@ -34,9 +34,30 @@ var randomBoxCoroutine;
 var zombieCoroutine;
 var randomZombieCoroutine;
 
+app.use(express.json());
 app.use(express.static('public'));
-app.use('/', function (req, res) {
-  res.sendFile(__dirname + '/index.html');
+app.get('/', function (req, res) {
+  console.log("gelen istek: ", req.body);
+  try{
+  //tokeni kontrol ediyoruz
+  var clientServerOptions = {
+    uri: 'http://localhost:5001/api/auth/checkToken',
+    body: JSON.stringify(req.body),
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  request(clientServerOptions, function (error, response) {
+    res.send(response.body);
+    return;
+  });
+  }catch(err){
+    console.log("unauthorized");
+    return res.status(401).send("you are unauthorized");
+  }
+
+  res.sendFile(__dirname + '/public/main.html');
 });
 
 server.listen(7777, function () {
@@ -671,7 +692,7 @@ io.on('connection', function (socket) {
 
   // biri mesaj gönderdi
   socket.on('chatmsg', function (msg) {
-    if (msg != lastMsg && msg .length < 20) {
+    if (msg != lastMsg && msg.length < 20) {
       socket.broadcast.emit('chatmsgEvent', msg);
       lastMsg = msg;
     }
