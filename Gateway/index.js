@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const databaseRoute = require('./Routes/DatabaseRoute/databaseRoute');
 const gameRoute = require('./Routes/GameRoute/gameRoute');
 var app = express();
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api/database',  databaseRoute);

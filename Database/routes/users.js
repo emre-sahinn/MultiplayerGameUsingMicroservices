@@ -6,6 +6,7 @@ const User = require("../models/user")
 //register
 router.post("/register", async (req, res) => {
   try {
+      console.log(req.body);
     const checkUser = await User.findOne({ username: req.body.username });
     if (checkUser) {
       return res.status(404).json("user already exists");
@@ -21,7 +22,15 @@ router.post("/register", async (req, res) => {
 
     //save user and respond
     const user = await newUser.save();
-    res.status(200).json(user);
+
+    const accessToken = jwt.sign(
+        {
+          id: user._id,
+        }, "microserviceapp", //secret key
+        { expiresIn: "3d" }
+      );
+
+    res.status(200).json(accessToken);
   } catch (err) {
       console.log(err);
     res.status(500).json(err)
@@ -31,6 +40,7 @@ router.post("/register", async (req, res) => {
 //LOGIN
 router.post("/login", async (req, res) => {
   try {
+    console.log(req.body);
     const user = await User.findOne({ username: req.body.username });
     if (!user) {
       return res.status(404).json("user not found");
@@ -40,7 +50,6 @@ router.post("/login", async (req, res) => {
     const validPassword = await bcrypt.compare(req.body.password, user.password)
     if (!validPassword) {
       return res.status(400).json("wrong password");
-
     }
 
     const accessToken = jwt.sign(
@@ -53,8 +62,8 @@ router.post("/login", async (req, res) => {
     const { password, ...others } = user._doc;
     res.status(200).json({ ...others, accessToken });
 
-
   } catch (err) {
+    console.log(err);
     res.status(500).json(err)
   }
 });

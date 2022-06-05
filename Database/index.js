@@ -20,7 +20,7 @@ app.post("/api/login", (req, res) => {
     res.send("hello from database");
 });
 
-app.use("/api/users", userRoute);
+app.use("/api/auth", userRoute);
 
 app.get("*", (req, res) => {
     res.status(404).send("Get API not found.");
