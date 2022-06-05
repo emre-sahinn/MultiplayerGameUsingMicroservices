@@ -12,32 +12,25 @@ export default function Login() {
   const token = useContext(AuthContext);
   
 
-  useEffect(() => {
-    console.log("abc");
-    /*
-      const fetchServerList = async () => {
-        try {
-          const res = await axios.get("http://localhost:80/api/game/serverList");
-          console.log("serverList",res.data);
-          setServerList(res.data);
-        } catch (err) {}
-      };
-      fetchServerList(); */
-  }, []);
 
-  const handleClick = async (e) => {
+  const handleClick =  (e) => {
      e.preventDefault();
+     console.log("abc")
+     const authLogin = async () => {
      try {
       const res = await axios.post("http://localhost:80/api/database/login", { username: username.current.value, password: password.current.value });
       console.log("res", res.data);
       token.tokenHandler(res.data);
-  
+      window.location.assign("http://localhost:3000/home");
       toast.success("başarılı");
+      
     } catch (err) {
 
       toast.error("lütfen bilgilerinizi kontrol edin");
 
     }
+  }
+  authLogin();
   };
 
   return (
@@ -66,11 +59,11 @@ export default function Login() {
               ref={password} />
             <div className="LogRegbuttons">
               <div className="loginButCon">
-                <Link to="/">
+            
                   <button className="loginButton" type="submit">
                     Log In
                   </button>
-                </Link>
+               
               </div>
               <div className="RegisterbutCon">
                 <Link to="/register" >
