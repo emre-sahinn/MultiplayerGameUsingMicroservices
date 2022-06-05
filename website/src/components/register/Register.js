@@ -7,14 +7,13 @@ import { ToastContainer, toast } from 'react-toastify';
 
 export default function Register() {
   const username = useRef();
-  const email = useRef();
   const password = useRef();
   const passwordAgain = useRef();
 
 
   const handleClick = async (e) => {
     e.preventDefault(); //logine basınca sayfa yenilenmesin diye
-    /*
+    
     if (passwordAgain.current.value !== password.current.value) {
       passwordAgain.current.setCustomValidity("password dont match");
       toast.error("parolalar eşleşmiyor")
@@ -22,20 +21,19 @@ export default function Register() {
     } else {
       const user = {
         username: username.current.value,
-        email: email.current.value,
         password: password.current.value,
       };
       try {
-        const res = await axios.post("/auth/activateAccount/", user); //current chat varsa önemli
+        const res = await axios.post("http://localhost:80/api/database/register/", user); //current chat varsa önemli
         console.log("buraya girildi")
         
         toast.success("please check your email");
 
       } catch (err) {
         console.log(err);
-        toast.error("işlem başarısız")
+        toast.error("please check your email");
       }
-    }*/
+    }
   };
 
   return (
@@ -50,7 +48,6 @@ export default function Register() {
         <div className="registerRight">
           <form className="registerBox" onSubmit={handleClick}>
             <input placeholder="Username" required ref={username} className="registerInput" />
-            <input placeholder="Email" required type="email" ref={email} className="registerInput" />
             <input placeholder="Password" required minLength="6" type="password" ref={password} className="registerInput" />
             <input placeholder="Password Again" required type="password" ref={passwordAgain} className="registerInput" />
             
