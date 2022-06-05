@@ -1,20 +1,21 @@
 import "./login.css";
-import {useRef} from "react";
+import { useRef } from "react";
 import axios from "axios";
 //import {loginCall} from "../../apiCalls";
 import { CircularProgress } from "@material-ui/core";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
-  const username= useRef();
-  const password= useRef();
-  
-  
- // const { user,isFetching,error,dispatch}=useContext(AuthContext);
+  const username = useRef();
+  const password = useRef();
 
-  const handleClick= async(e)=>{
+
+  // const { user,isFetching,error,dispatch}=useContext(AuthContext);
+
+  const handleClick = async (e) => {
+    /*
     e.preventDefault(); //logine basınca sayfa yenilenmesin diye
    console.log("xyz");
    try{
@@ -27,10 +28,10 @@ export default function Login() {
 
    }
     
-  
-    
+  */
+
   };
-  
+
   return (
     <div className="login">
       <div className="loginWrapper">
@@ -42,35 +43,42 @@ export default function Login() {
         </div>
         <div className="loginRight">
           < form className="loginBox" onSubmit={handleClick}>
-            
-            <input 
-            placeholder="Username" 
-            className="loginInput"  
-            required 
-            ref={username} />
-            <input 
-            placeholder="Password" 
-            type="password" 
-            className="loginInput" 
-            minLength="6"
-            required
-            ref={password} />
+
+            <input
+              placeholder="Username"
+              className="loginInput"
+              required
+              ref={username} />
+            <input
+              placeholder="Password"
+              type="password"
+              className="loginInput"
+              minLength="6"
+              required
+              ref={password} />
             <div className="LogRegbuttons">
-            <button className="loginButton" type="submit">
-            Log In
-            </button>
-            
-            <button className="loginRegisterButton">  Create a New Account </button>
-            
-           
+              <div className="loginButCon">
+                <Link to="/">
+                  <button className="loginButton" type="submit">
+                    Log In
+                  </button>
+                </Link>
+              </div>
+              <div className="RegisterbutCon">
+                <Link to="/register" >
+                  <button className="loginRegisterButton">  Create a New Account </button>
+                </Link>
+              </div>
+
+
             </div>
             <ToastContainer
-                hideProgressBar
-                position="bottom-center"
-                pauseOnHover={true}
-                autoClose={1000}
-              />
-           
+              hideProgressBar
+              position="bottom-center"
+              pauseOnHover={true}
+              autoClose={1000}
+            />
+
           </form>
         </div>
       </div>
