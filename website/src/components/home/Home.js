@@ -3,30 +3,29 @@ import axios from "axios";
 import { Link } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  const serverFirst = async (e) => {
-    /*
-    try {
-      const res = await axios.post("http://localhost:80/api/game/1");
-      console.log("serverfirst", res.data);
-      toast.success("başarılı");
-    } catch (err) {
-      toast.error("Hata");
-    }*/
-  };
-   
-  const serverSecond = async (e) => {
-    /*
-    try {
-      const res = await axios.post("http://localhost:80/api/game/2");
-      console.log("serversecond", res.data);
-      toast.success("başarılı");
-    } catch (err) {
-      toast.error("Hata");
+  const [serverList, setServerList] = useState([]);
 
-    }*/
-  };
+  useEffect(() => {
+    const fetchServerList = async () => {
+      try {
+        const res = await axios.get("http://localhost:80/api/game/serverList");
+        console.log("serverList", res.data);
+        setServerList(res.data);
+      } catch (err) { }
+    };
+    fetchServerList();
+  }, []);
+
+  
+  const handleClick = (server) => {
+  
+    console.log("server",server);
+    window.location.assign(server.IP + ":" + server.port);
+ 
+ };
 
   return (
     <div className="home">
@@ -39,22 +38,19 @@ export default function Home() {
         </div>
         <div className="homeRight">
           < div className="homeBox" >
-
-            
             <div className="homeButtons">
-              <div className="homeSerFirst">
-                <Link to="/">
-                  <button className="homeSerFirstButton"  onClick={serverFirst}>
-                    Server1
+              {(serverList.length > 0) && serverList.map((server) => (
+                <div className="homeServer" key= {server._id}>
+
+                  <button className="homeServerButton" onClick={() => handleClick(server)}>
+                    server  {serverList.indexOf(server) + 1}
+
                   </button>
-                </Link>
-              </div>
-              <div className="homeSerSec">
-                <Link to="/" >
-                  <button className="homeSerSecButton" onClick={serverSecond}> 
-                  Server2 </button>
-                </Link>
-              </div>
+
+
+                </div>
+              ))
+              }
 
 
             </div>

@@ -48,20 +48,23 @@
             
 .homeButtons{
     display: flex;
-    flex-direction: column;
-    gap:10%;
-    align-items: center;
+    flex-wrap: wrap;
+ 
     height: 60%;
+    overflow-y: auto;
+  
   
 
 }
-.homeSerFirst{
+.homeServer{
   
     height:50%;
+    flex: 1;
+    
 
 }
                
-.homeSerFirstButton{
+.homeServerButton{
     height: 50px;
     border-radius: 10px;
     border: none;
@@ -70,26 +73,10 @@
     font-size: 20px;
     font-weight: 500;
     cursor: pointer;
-    width:200px;
+    
+    width: fit-content;
+   
 
 }
                  
-.homeSerSec{
-   height: 50%;
-   
- 
-
-}
-.homeSerSecButton{
-    height: 50px;
-    border-radius: 10px;
-    border: none;
-    background-color: #42b72a;
-    color: white;
-    font-size: 20px;
-    font-weight: 500;
-    cursor: pointer;
-    width:200px;
-
-}
-            
+        

@@ -1,5 +1,5 @@
 import "./login.css";
-import { useRef, useState,useContext} from "react";
+import { useRef, useState,useContext,useEffect} from "react";
 import axios from "axios";
 import { Link } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
@@ -10,6 +10,20 @@ export default function Login() {
   const username = useRef();
   const password = useRef();
   const token = useContext(AuthContext);
+  
+
+  useEffect(() => {
+    console.log("abc");
+    /*
+      const fetchServerList = async () => {
+        try {
+          const res = await axios.get("http://localhost:80/api/game/serverList");
+          console.log("serverList",res.data);
+          setServerList(res.data);
+        } catch (err) {}
+      };
+      fetchServerList(); */
+  }, []);
 
   const handleClick = async (e) => {
      e.preventDefault();
