@@ -1,9 +1,7 @@
 var express = require('express');
 var app = express();
 var server = require('http').Server(app);
-
 var io = require('socket.io')(server);
-
 
 //oyuncuları tutacağımız dict
 var players = {};
@@ -36,13 +34,12 @@ var randomBoxCoroutine;
 var zombieCoroutine;
 var randomZombieCoroutine;
 
-app.use(express.static(__dirname + '/public'));
-
-app.get('/', function (req, res) {
+app.use(express.static('public'));
+app.use('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
 });
 
-server.listen(80, function () {
+server.listen(7777, function () {
 
   console.log(`Listening on ${server.address().port}`);
 

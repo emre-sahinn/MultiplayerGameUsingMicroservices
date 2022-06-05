@@ -25,11 +25,11 @@ app.post("/api/login", (req, res) => {
 app.use("/api/auth", userRoute);
 
 app.get("*", (req, res) => {
-    res.status(404).send("Get API not found.");
+    res.status(404).send("Database: Get API not found.");
 });
 
 app.post("*", (req, res) => {
-    res.status(404).send("Post API not found.");
+    res.status(404).send("Database: Post API not found.");
 });
 
 const port= process.env.PORT || 5000;
