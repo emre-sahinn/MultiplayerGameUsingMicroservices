@@ -19,7 +19,7 @@ router.post('/login', function(req, res) {
         if(token){
             res.send(JSON.parse(response.body).accessToken);
         }else{
-            res.send(response.body);
+            res.status(404).send(response.body);
         }
         return;
     });
