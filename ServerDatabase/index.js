@@ -38,7 +38,7 @@ app.post("/api/server/add", async (req, res) => {
   }
 });
 
-app.post("/api/server/list", async (req, res) => {
+app.get("/api/server/list", async (req, res) => {
   console.log(req.body);
   const serverList = await Server.find({});
   res.send(serverList);
@@ -52,7 +52,7 @@ app.post("/api/server/remove", async (req, res) => {
   console.log(result);
 });
 
-const port= process.env.PORT || 5000;
+const port= process.env.PORT || 5001;
 app.listen(port, () => {
   console.log(`localhost:${port} started.`);
 });

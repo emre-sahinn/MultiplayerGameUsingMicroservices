@@ -1,12 +1,26 @@
 var express = require('express');
 var router = express.Router();
+var request = require('request');
 
-router.post('/1', function(req, res) {
-    res.send('POST ile /1 isteği yapıldı.');
+router.get('/serverList', function(req, res) {
+    //send POST request to the database microservice
+    var clientServerOptions = {
+        uri: 'http://localhost:5001/api/server/list',
+        body: JSON.stringify(req.body),
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    console.log("serverList request sent");
+    request(clientServerOptions, function (error, response) {
+        res.send(response.body);
+        return;
+    });
 });
 
-router.post('/2', function(req, res) {
-    res.send('POST ile /2 isteği yapıldı.');
+router.post('/play', function(req, res) {
+    //hangi sunucuya girecegini secsin
 });
 
 module.exports = router;
