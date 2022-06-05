@@ -8,16 +8,26 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
-  const email= useRef();
+  const username= useRef();
   const password= useRef();
   
   
  // const { user,isFetching,error,dispatch}=useContext(AuthContext);
 
-  const handleClick= (e)=>{
+  const handleClick= async(e)=>{
     e.preventDefault(); //logine basınca sayfa yenilenmesin diye
-   
-    //loginCall({email:email.current.value,password:password.current.value},dispatch);
+   console.log("xyz");
+   try{
+    const res = await axios.post("http://localhost:80/api/database/login",{ username:username.current.value,password:password.current.value});
+    console.log("res",res.data);
+    toast.success("başarılı");
+   }catch(err){
+    
+     toast.error("lütfen bilgilerinizi kontrol edin");
+
+   }
+    
+  
     
   };
   
@@ -34,11 +44,10 @@ export default function Login() {
           < form className="loginBox" onSubmit={handleClick}>
             
             <input 
-            placeholder="Email" 
-            type="email" 
+            placeholder="Username" 
             className="loginInput"  
             required 
-            ref={email} />
+            ref={username} />
             <input 
             placeholder="Password" 
             type="password" 
