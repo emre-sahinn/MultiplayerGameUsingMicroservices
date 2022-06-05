@@ -1,0 +1,48 @@
+<style>
+    #bodybox {
+        margin: auto;
+        max-width: 290px;
+        font: 15px arial, sans-serif;
+    }
+
+    #chatborder {
+        border-style: solid;
+        background-color: #00000057;
+        border-width: 3px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-left: 20px;
+        margin-right: 20px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        padding-right: 3px;
+        padding-left: 3px;
+        border-radius: 3px;
+    }
+
+    .chatlog {
+        font: 15px arial, sans-serif, bold;
+        color: white;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        margin: 1px;
+    }
+
+    #chatbox {
+        font: 17px arial, sans-serif;
+        height: 22px;
+        width: 96%;
+    }
+</style>
+
+<div id='bodybox'>
+    <div id='chatborder'>
+        <p id="chatlog5" class="chatlog">&nbsp;</p>
+        <p id="chatlog4" class="chatlog">&nbsp;</p>
+        <p id="chatlog3" class="chatlog">&nbsp;</p>
+        <p id="chatlog2" class="chatlog">&nbsp;</p>
+        <p id="chatlog1" class="chatlog">&nbsp;</p>
+        <input type="text" name="chat" id="chatbox" placeholder="type here.." maxlength="23">
+    </div>
+</div>
