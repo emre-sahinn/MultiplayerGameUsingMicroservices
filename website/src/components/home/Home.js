@@ -8,7 +8,7 @@ import {AuthContext} from "../../context/AuthContext";
 
 export default function Home() {
   const [serverList, setServerList] = useState([]);
-  const {dispatch} = useContext(AuthContext);
+  const {dispatch,token} = useContext(AuthContext);
 
   useEffect(() => {
     const fetchServerList = async () => {
@@ -23,12 +23,17 @@ export default function Home() {
 
   
   const handleClick = (server) => {
-  
-    console.log("server",server);
-    window.location.assign(server.IP + ":" + server.port);
- 
- };
- const LogOut = () => {
+    const fetchTokenLink = async () => {
+      try {
+     // const res = await axios.post("http://localhost:80/api/auth/"+ {token});
+      window.location.assign(server.IP + ":" + server.port);
+      
+    } catch (err) { }
+  };
+  fetchTokenLink();
+};
+
+const LogOut = () => {
   dispatch({type: "LOGOUT"});
 };
 

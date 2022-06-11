@@ -15,14 +15,11 @@ export default function Login() {
 
   const handleClick =  (e) => {
      e.preventDefault();
-     console.log("abc")
      dispatch({type: "LOGIN_START"});
      const authLogin = async () => {
      try {
       const res = await axios.post("http://localhost:80/api/database/login", { username: username.current.value, password: password.current.value });
-      console.log("res", res.data);
       dispatch({type: "LOGIN_SUCCESS", payload: res.data});
-      //window.location.assign("http://localhost:3000/home");
       toast.success("başarılı");
       
     } catch (err) {
