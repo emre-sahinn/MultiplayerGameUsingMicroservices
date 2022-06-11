@@ -9,19 +9,20 @@ import {AuthContext} from "../../context/AuthContext";
 export default function Login() {
   const username = useRef();
   const password = useRef();
-  const token = useContext(AuthContext);
+  const {token,dispatch} = useContext(AuthContext);
   
 
 
   const handleClick =  (e) => {
      e.preventDefault();
      console.log("abc")
+     dispatch({type: "LOGIN_START"});
      const authLogin = async () => {
      try {
       const res = await axios.post("http://localhost:80/api/database/login", { username: username.current.value, password: password.current.value });
       console.log("res", res.data);
-      token.tokenHandler(res.data);
-      window.location.assign("http://localhost:3000/home");
+      dispatch({type: "LOGIN_SUCCESS", payload: res.data});
+      //window.location.assign("http://localhost:3000/home");
       toast.success("başarılı");
       
     } catch (err) {
