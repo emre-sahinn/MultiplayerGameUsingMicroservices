@@ -1,3 +1,4 @@
+const jwt_decode = require("jwt-decode");
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -27,8 +28,9 @@ router.post("/register", async (req, res) => {
     const accessToken = jwt.sign(
         {
           id: user._id,
+          username: user.username
         }, "microserviceapp", //secret key
-        { expiresIn: "3d" }
+        { expiresIn: "3d" },
       );
 
     res.status(200).json(accessToken);
@@ -56,6 +58,7 @@ router.post("/login", async (req, res) => {
     const accessToken = jwt.sign(
       {
         id: user._id,
+        username: user.username
       }, "microserviceapp", //secret key
       { expiresIn: "3d" }
     );
@@ -71,6 +74,7 @@ router.post("/login", async (req, res) => {
 
 //Check token 
 router.post("/checkToken", async (req, res) => {
+  console.log("checking token: " + req.body.token)
   try {
     console.log(req.body);
     jwt.verify(req.body.token, "microserviceapp", function(err, decoded) {
@@ -79,7 +83,9 @@ router.post("/checkToken", async (req, res) => {
       }
   });
 
-  res.send("user authenticated");
+  var decoded = jwt_decode(req.body.token);
+  console.log(decoded);
+  res.send(decoded.username);
   } catch (err) {
     console.log(err);
     res.status(500).json(err)

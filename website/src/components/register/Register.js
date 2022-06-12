@@ -17,7 +17,6 @@ export default function Register() {
     if (passwordAgain.current.value !== password.current.value) {
       passwordAgain.current.setCustomValidity("password dont match");
       toast.error("parolalar eşleşmiyor")
-      console.log("abc")
     } else {
       const user = {
         username: username.current.value,

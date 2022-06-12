@@ -1,4 +1,6 @@
+var cors = require('cors');
 var express = require('express');
+var request = require('request');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
@@ -35,30 +37,30 @@ var zombieCoroutine;
 var randomZombieCoroutine;
 
 app.use(express.json());
+app.use(cors());
 app.use(express.static('public'));
 app.get('/', function (req, res) {
-  console.log("gelen istek: ", req.body);
-  /*
-//tokeni kontrol ediyoruz
-  try{
-  var clientServerOptions = {
-    uri: 'http://localhost:5001/api/auth/checkToken',
-    body: JSON.stringify(req.body),
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }
-  request(clientServerOptions, function (error, response) {
-    res.send(response.body);
-    return;
-  });
-  }catch(err){
-    console.log("unauthorized");
+  console.log("gelen istek: ", req.query.token);
+  //tokeni kontrol ediyoruz
+  try {
+    request.post(
+      'http://localhost:80/api/database/checkToken',
+      { json: { token: req.query.token } },
+      function (error, response, body) {
+          if (!error && response.statusCode == 200) {
+              console.log("INFO: user " + body + " authenticated");
+              res.sendFile(__dirname + '/public/main.html');
+          }else{
+            return res.status(401).send("you are unauthorized");
+          }
+      }
+  );
+
+  } catch (err) {
+    console.log("unauthorized " + err);
     return res.status(401).send("you are unauthorized");
   }
-*/
-  res.sendFile(__dirname + '/public/main.html');
+  
 });
 
 server.listen(7777, function () {
@@ -67,20 +69,17 @@ server.listen(7777, function () {
 
   randomBoxCoroutine = setInterval(createBox, 10000);
   zombieCoroutine = setInterval(zombieUpdate, 1000);
-  randomZombieCoroutine = setInterval(createZombie, 120000);//60000
-
-
-
+  randomZombieCoroutine = setInterval(createZombie, 60000);
 
   //weaponType = 0 silah yok demek
   //silah isOccupied yapıldıysa client görmesin
   weapons[weaponsIDcounter] = {
     silahID: weaponsIDcounter++,
-    x: 50,
-    y: 50,
-    weaponType: 1, //bos
+    x: 350,
+    y: 350,
+    weaponType: 1,
     isOccupied: false,
-    ammo: 0,
+    ammo: 100,
   };
 
   weapons[weaponsIDcounter] = {

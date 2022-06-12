@@ -15,8 +15,10 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "jwt-decode": "^3.1.2",
     "phaser": "^3.53.1",
     "phaser-ui-tools": "^2.0.0-beta",
+    "request": "^2.88.2",
     "socket.io": "^4.0.0",
     "webfontloader": "^1.6.28"
   }

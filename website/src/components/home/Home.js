@@ -25,9 +25,8 @@ export default function Home() {
   const handleClick = (server) => {
     const fetchTokenLink = async () => {
       try {
-     // const res = await axios.post("http://localhost:80/api/auth/"+ {token});
-      window.location.assign(server.IP + ":" + server.port);
-      
+        console.log("loading http://localhost:7777");
+      window.location.assign(server.IP + ":" + server.port + "/?token=" + token);
     } catch (err) { }
   };
   fetchTokenLink();
@@ -45,7 +44,7 @@ const LogOut = () => {
         <div className="homeLeft">
           <h3 className="homeLogo">Pixel Arena</h3>
           <span className="homeDesc">
-            2D Pixel Survival Games
+            2D Pixel Survival Game
           </span>
           <Link to="/" >
           <button className="homeLogOutButton" onClick={() => LogOut()}>

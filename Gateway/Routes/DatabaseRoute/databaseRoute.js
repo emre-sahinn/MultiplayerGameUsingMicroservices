@@ -43,4 +43,23 @@ router.post('/register', function(req, res) {
     });
 });
 
+router.post('/checkToken', function(req, res) {
+    console.log("checkToken received");
+    console.log("checkToken: " + JSON.stringify(req.body.token));
+    //send POST request to the database microservice
+    var clientServerOptions = {
+        uri: 'http://localhost:5000/api/auth/checkToken',
+        body: JSON.stringify(req.body),
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    console.log("checkToken request sent");
+    request(clientServerOptions, function (error, response) {
+        res.status(response.statusCode).send(response.body);
+        return;
+    });
+});
+
 module.exports = router;

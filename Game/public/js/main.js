@@ -45,8 +45,15 @@ var MenuScene = new Phaser.Class({
         this.loginUI.addListener('click');
         var that = this;
 
+        var token = location.search.split('token=')[1]
 
-        var username = "isimler tokenden gelecek"
+        var base64Url = token.split('.')[1];
+        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+
+        var username = JSON.parse(jsonPayload).username;
         that.scene.start('GameScene', { username: username });
         //  Populate the text with whatever they typed in
         //console.log('Welcome ' + inputText.value);
