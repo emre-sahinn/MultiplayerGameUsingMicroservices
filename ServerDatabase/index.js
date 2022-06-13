@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect("mongodb+srv://MicroserviceProject:mongo.123@cluster0.hwcs8on.mongodb.net/test", {
+mongoose.connect("", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   }).then(() => console.log("Database connected!"))
