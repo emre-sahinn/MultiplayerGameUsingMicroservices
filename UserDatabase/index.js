@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect("mongodb+srv://MicroserviceProject:mongo.123@microserviceproject.gbycla6.mongodb.net/?retryWrites=true&w=majority", {
+mongoose.connect("", {
 
   useNewUrlParser: true,
 
